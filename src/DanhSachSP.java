@@ -48,7 +48,7 @@ public class DanhSachSP implements Comparable<DanhSachSP> {
 
     @Override
     public String toString() {
-        return this.MaSP+". "+this.TenSP+"-        "+this.HangSX+" -> "+this.GiaSP+"vnđ";
+        return this.MaSP+"."+this.TenSP+"-"+this.HangSX+" -> "+this.GiaSP+"vnđ";
     }
 
     @Override
