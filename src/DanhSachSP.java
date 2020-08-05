@@ -1,5 +1,8 @@
-public class DanhSachSP implements Comparable<DanhSachSP> {
-    private String MaSP;
+import java.io.Serializable;
+
+public class DanhSachSP implements Serializable {
+    private int idSP;
+    private String SoLuongSP;
     private String TenSP;
     private String HangSX;
     private String GiaSP;
@@ -7,19 +10,28 @@ public class DanhSachSP implements Comparable<DanhSachSP> {
     public DanhSachSP(){
     }
 
-    public DanhSachSP(String maSP, String tenSP, String hangSX, String giaSP) {
-        MaSP = maSP;
+    public DanhSachSP(int idSP, String soLuongSP, String tenSP, String hangSX, String giaSP) {
+        this.idSP = idSP;
+        SoLuongSP = soLuongSP;
         TenSP = tenSP;
         HangSX = hangSX;
         GiaSP = giaSP;
     }
 
-    public String getMaSP() {
-        return MaSP;
+    public int getIdSP() {
+        return idSP;
     }
 
-    public void setMaSP(String maSP) {
-        MaSP = maSP;
+    public void setIdSP(int idSP) {
+        this.idSP = idSP;
+    }
+
+    public String getSoLuongSP() {
+        return SoLuongSP;
+    }
+
+    public void setSoLuongSP(String soLuongSP) {
+        SoLuongSP = soLuongSP;
     }
 
     public String getTenSP() {
@@ -46,15 +58,8 @@ public class DanhSachSP implements Comparable<DanhSachSP> {
         GiaSP = giaSP;
     }
 
-    @Override
-    public String toString() {
-        return this.MaSP+"."+this.TenSP+"-"+this.HangSX+" -> "+this.GiaSP+"vnđ";
-    }
 
-    @Override
-    public int compareTo(DanhSachSP danhSachSP) {
-        return this.getTenSP().compareTo(danhSachSP.getTenSP());
-    }
+
 
 }
 
