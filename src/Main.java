@@ -1,14 +1,17 @@
+import product.ProductManagement;
+
 import java.util.*;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        DSSPManager dsspManager = new DSSPManager();
+        ProductManagement productManagement = new ProductManagement();
 
 
-        dsspManager.show();
-        while (true) {
+        boolean check = true;
+        productManagement.show();
+        while (check) {
             int choice;
             System.out.println("Menu");
             System.out.println("1. Thêm sản phẩm");
@@ -19,50 +22,54 @@ public class Main {
             System.out.println("0. Exit");
             System.out.println("Enter your choice (ENTER NUMBER): ");
 
-
             try {
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-                        dsspManager.add();
-                        System.out.println("Đã thêm xong");
+                        try {
+                            productManagement.add();
+                            sc.nextLine();
+                            System.out.println("Đã thêm xong");
+                            System.out.println();
+                        } catch (InputMismatchException e) {
+                            System.err.println("Yêu cầu nhập số");
+                            productManagement.editEx();
+                        }
                         break;
                     case 2:
-                        System.out.println("Chọn mã SP muốn xóa :");
+                        System.out.println("Chọn ID SP muốn xóa :");
                         sc.nextLine();
-                        String id1 = sc.nextLine();
-                        int idSP1 = Integer.parseInt(id1);
-                        dsspManager.delete(idSP1);
+                        int id1 = sc.nextInt();
+                        productManagement.delete(id1);
                         break;
                     case 3:
-                        System.out.println("Chọn mã SP muốn sửa :");
+                        System.out.println("Chọn ID SP muốn sửa :");
                         sc.nextLine();
-                        String id2 = sc.nextLine();
-                        int idSP2 = Integer.parseInt(id2);
-                        dsspManager.edit(idSP2);
-                        System.out.println("Danh sách Sản Phẩm sau khi sửa :");
-                        dsspManager.show();
+                        int id2 = sc.nextInt();
+                        productManagement.edit(id2);
 
                         break;
                     case 4:
-                        dsspManager.sortByTenSP();
+                        productManagement.sortByName();
                         System.out.println("Danh sách Sản Phẩm sắp xếp theo tên :");
-                        dsspManager.show();
+                        productManagement.show();
                         break;
                     case 5:
-                        dsspManager.sortByGiaSP();
+                        productManagement.sortByPrice();
                         System.out.println("Danh sách Sản Phẩm sắp xếp theo giá :");
-                        dsspManager.show();
+                        productManagement.show();
                         break;
                     case 0:
-                        System.exit(0);
+                        check = false;
+                        break;
                     default:
                         System.out.println("No choice!");
                 }
-            } catch (InputMismatchException e) {
-                System.err.println("Nhập số cơ mà ??:D??");
-                break;
+            } catch (InputMismatchException ex) {
+                System.err.println("Yêu cầu nhập số");
+                Main.sc.nextLine();
             }
+
         }
     }
 }
