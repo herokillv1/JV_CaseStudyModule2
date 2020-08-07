@@ -1,9 +1,7 @@
 package user;
 
-import product.ProductsList;
-import readandwritefile.ReadAndWriteFile;
 
-import java.util.InputMismatchException;
+import readandwritefile.ReadAndWriteFile;
 import java.util.List;
 import java.util.Scanner;
 

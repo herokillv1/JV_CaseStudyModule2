@@ -1,7 +1,6 @@
 package product;
 
 import readandwritefile.ReadAndWriteFile;
-
 import java.util.*;
 
 public class ProductManagement {

@@ -1,6 +1,5 @@
 package product;
 
-
 import java.util.Comparator;
 
 public class SortByName implements Comparator<ProductsList> {

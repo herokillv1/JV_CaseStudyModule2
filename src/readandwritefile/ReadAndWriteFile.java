@@ -1,13 +1,10 @@
 package readandwritefile;
 
-
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadAndWriteFile<E> {
-
 
    public void writeFile(String PATH,List<E> list) {
 

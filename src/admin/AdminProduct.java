@@ -2,7 +2,6 @@ package admin;
 
 import product.ProductManagement;
 import user.UserManager;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
