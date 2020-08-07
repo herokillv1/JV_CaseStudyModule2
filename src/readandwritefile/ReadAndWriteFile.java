@@ -1,4 +1,4 @@
-package product;
+package readandwritefile;
 
 
 
@@ -6,15 +6,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsListFile {
+public class ReadAndWriteFile<E> {
 
 
-    void writeObjectFile(String PATH,List<ProductsList> productsLists) {
+   public void writeFile(String PATH,List<E> list) {
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(PATH);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(productsLists);
+            objectOutputStream.writeObject(list);
             objectOutputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -24,21 +24,21 @@ public class ProductsListFile {
 
     }
 
-    List<ProductsList> readObjectFil(String PATH) {
-        List<ProductsList> productsLists = new ArrayList<>();
+    public List<E> readFile(String PATH) {
+        List<E> list = new ArrayList<>();
         try {
             FileInputStream fileInputStream = new FileInputStream(PATH);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            productsLists = (List<ProductsList>) objectInputStream.readObject();
+            list = (List<E>) objectInputStream.readObject();
             objectInputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            System.err.println("Ko có sản phẩm nào");
+            System.out.println("");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-            return productsLists;
+            return list;
         }
 
     }

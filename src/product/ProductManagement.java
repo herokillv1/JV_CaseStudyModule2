@@ -1,5 +1,7 @@
 package product;
 
+import readandwritefile.ReadAndWriteFile;
+
 import java.util.*;
 
 public class ProductManagement {
@@ -7,12 +9,12 @@ public class ProductManagement {
     private static final String PATH = "TXT/fileDanhSachSanPham.txt";
     public static Scanner sc = new Scanner(System.in);
     private List<ProductsList> productsLists;
-    private ProductsListFile productsListFile1;
+    private ReadAndWriteFile<ProductsList> readAndWriteFile;
 
 
     public ProductManagement() {
-        productsListFile1 = new ProductsListFile();
-        productsLists = productsListFile1.readObjectFil(PATH);
+        readAndWriteFile = new ReadAndWriteFile();
+        productsLists = readAndWriteFile.readFile(PATH);
     }
 
 
@@ -37,7 +39,7 @@ public class ProductManagement {
 
         ProductsList productsList = new ProductsList(idSP, 100, name, brand, price);
         productsLists.add(productsList);
-        productsListFile1.writeObjectFile(PATH, productsLists);
+        readAndWriteFile.writeFile(PATH, productsLists);
     }
 
     public void editEx() {
@@ -57,7 +59,7 @@ public class ProductManagement {
             System.out.println("Đã xóa sản phẩm : " + danhSachSP.getName());
             System.out.println();
             productsLists.remove(danhSachSP);
-            productsListFile1.writeObjectFile(PATH, productsLists);
+            readAndWriteFile.writeFile(PATH, productsLists);
         } else {
             System.out.printf("Id = %d không tồn tại.\n", idSP);
         }
@@ -125,8 +127,12 @@ public class ProductManagement {
         if (!isExisted) {
             System.out.printf("Id = %d không tồn tại.\n",id);
         } else {
-            productsListFile1.writeObjectFile(PATH, productsLists);
+            readAndWriteFile.writeFile(PATH, productsLists);
         }
+    }
+
+    public void buy(){
+
     }
 
     public void sortByName() {
