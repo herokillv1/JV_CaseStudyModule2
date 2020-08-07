@@ -1,4 +1,5 @@
 import admin.AdminProduct;
+import org.omg.CORBA.MARSHAL;
 import user.UserManager;
 
 import java.util.*;
@@ -9,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         AdminProduct adminManagers = new AdminProduct();
         UserManager userManager = new UserManager();
-        userManager.add();
 
         boolean check = true;
         while (check){
@@ -22,6 +22,13 @@ public class Main {
                 int choice = sc.nextInt();
                 switch (choice){
                     case 1:
+                        System.out.println("<- Đăng nhập ->");
+                        sc.nextLine();
+                        System.out.println("Account :");
+                        String account = sc.nextLine();
+                        System.out.println("Pass :");
+                        String pass = sc.nextLine();
+                        adminManagers.checkAdmin(account,pass);
                         break;
                     case 2:
                         boolean checkUser = true;
@@ -35,7 +42,12 @@ public class Main {
                                 int choice1 = sc.nextInt();
                                 switch (choice1){
                                     case 1:
-                                        userManager.newAccount();
+                                        try {
+                                            userManager.newAccount();
+                                        } catch (InputMismatchException e) {
+                                            System.err.println("Tuổi phải nhập số.");
+                                            userManager.editEx();
+                                        }
                                         break;
                                     case 2:
                                         userManager.signin();
@@ -63,8 +75,6 @@ public class Main {
                 Main.sc.nextLine();
             }
         }
-
-//        adminManagers.adminManager();
 
     }
 }

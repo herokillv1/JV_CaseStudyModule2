@@ -1,6 +1,7 @@
 package admin;
 
 import product.ProductManagement;
+import user.UserManager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,16 +10,17 @@ public class AdminProduct {
     public static Scanner sc = new Scanner(System.in);
     public void adminManager() {
         ProductManagement productManagement = new ProductManagement();
+        UserManager userManager = new UserManager();
         boolean check = true;
-        productManagement.show();
         while (check) {
             int choice;
             System.out.println("Menu");
             System.out.println("1. Thêm sản phẩm");
             System.out.println("2. Xóa sản phẩm");
             System.out.println("3. Sửa thông tin sản phẩm");
-            System.out.println("4. Sắp xếp sản phẩm theo tên");
-            System.out.println("5. Sắp xếp sản phẩm theo giá");
+            System.out.println("4. Hiển thị danh sách SP");
+            System.out.println("5. Lịch sửa bán hàng");
+            System.out.println("6. Hiển thị account user");
             System.out.println("0. Exit");
             System.out.println("Enter your choice (ENTER NUMBER): ");
 
@@ -51,13 +53,14 @@ public class AdminProduct {
                         break;
                     case 4:
                         productManagement.sortByName();
-                        System.out.println("Danh sách Sản Phẩm sắp xếp theo tên :");
+                        System.out.println("Danh sách Sản Phẩm :");
                         productManagement.show();
                         break;
                     case 5:
-                        productManagement.sortByPrice();
-                        System.out.println("Danh sách Sản Phẩm sắp xếp theo giá :");
-                        productManagement.show();
+                        break;
+                    case 6:
+                        System.out.println("Danh sách KH :");
+                        userManager.show();
                         break;
                     case 0:
                         check = false;
@@ -70,6 +73,18 @@ public class AdminProduct {
                 AdminProduct.sc.nextLine();
             }
 
+        }
+    }
+
+    public void checkAdmin(String account ,String pass){
+        if (account.equals("admin")){
+            if (pass.equals("admin")){
+                adminManager();
+            }else {
+                System.out.println("Sai pass");
+            }
+        }else {
+            System.out.println("Sai account");
         }
     }
 }

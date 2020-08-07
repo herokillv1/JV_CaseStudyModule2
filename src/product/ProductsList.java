@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ProductsList implements Serializable {
     private int id;
-    private int amount = 100;
+    private int amount ;
 
     private String name;
     private String brand;

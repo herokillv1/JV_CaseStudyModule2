@@ -1,7 +1,9 @@
 package user;
 
-import admin.AdminProduct;
+import product.ProductsList;
 import readandwritefile.ReadAndWriteFile;
+
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,20 +12,15 @@ public class UserManager {
     public static Scanner sc = new Scanner(System.in);
     private List<InfomationUser> infomationUsers;
     private ReadAndWriteFile<InfomationUser> readAndWriteFile;
-    AdminProduct adminManager = new AdminProduct();
+    UserProduct userProduct = new UserProduct();
 
 
-    public void add(){
-        infomationUsers.add(new InfomationUser("Hiệp",23,"0123456789","user","user"));
-        readAndWriteFile.writeFile(PATH,infomationUsers);
-    }
-
-    public UserManager(){
+    public UserManager() {
         readAndWriteFile = new ReadAndWriteFile();
         infomationUsers = readAndWriteFile.readFile(PATH);
     }
 
-    public void newAccount(){
+    public void newAccount() {
         System.out.println("Nhập tên :");
         String name = sc.nextLine();
         System.out.println("Nhập tuổi :");
@@ -32,63 +29,96 @@ public class UserManager {
         System.out.println("Nhập số ĐT :");
         String phone = sc.nextLine();
         System.out.println("Nhập account :");
-        String account = sc.nextLine();
+        String account = checkAccount();
         System.out.println("Nhập Pass :");
         String pass = sc.nextLine();
-        checkAccount(account,pass);
+        System.out.println("Tạo account thành công.");
 
-        InfomationUser infomationUser = new InfomationUser(name,age,phone,account,pass);
+        InfomationUser infomationUser = new InfomationUser(name, age, phone, account, pass);
         infomationUsers.add(infomationUser);
-        readAndWriteFile.writeFile(PATH,infomationUsers);
+        readAndWriteFile.writeFile(PATH, infomationUsers);
 
     }
-     public  void signin(){
-         System.out.println("Nhập account :");
-         String account1 = sc.nextLine();
-         System.out.println("Nhập Pass :");
-         String pass1 = sc.nextLine();
-         checkSignin(account1,pass1);
-     }
 
-     public void checkSignin(String account,String pass){
+    public void signin() {
+        System.out.println("Nhập account :");
+        String account1 = sc.nextLine();
+        System.out.println("Nhập Pass :");
+        String pass1 = sc.nextLine();
+        checkSignin(account1, pass1);
+    }
+
+    public void checkSignin(String account, String pass) {
         boolean check = true;
-        for (int i=0;i<infomationUsers.size();i++){
-            if (account.equals(infomationUsers.get(i).getAccount())&&pass.equals(infomationUsers.get(i).getPass())){
+        for (int i = 0; i < infomationUsers.size(); i++) {
+            if (account.equals(infomationUsers.get(i).getAccount()) && pass.equals(infomationUsers.get(i).getPass())) {
                 check = false;
-                adminManager.adminManager();
+                userProduct.userProduct();
                 break;
             }
         }
-        if (check){
+        if (check) {
             System.out.println("Nhập sai");
-        }
-     }
-    public void checkAccount(String account,String pass){
-        boolean check = true;
-        for (int i=0;i<infomationUsers.size();i++){
-            if (account.equals(infomationUsers.get(i).getAccount())){
-                check = false;
-            }
-        }
-        if (check){
-            System.out.println("Tạo account thành công");
-        }else {
-            System.out.println("Account đã tồn tai");
-            newAccount();
         }
     }
 
-    public int setAge() {
-        while (true) {
-            try {
-                int age = sc.nextInt();
-                if (age < 0 && age > 120) {
-                    throw new NumberFormatException();
-                }
-                return age;
-            } catch (NumberFormatException ex) {
-                System.err.print("Không hợp lệ! Nhập lại tuổi : ");
+    public String checkAccount() {
+        String account = sc.nextLine();
+        boolean check = true;
+        for (int i = 0; i < infomationUsers.size(); i++) {
+            if (account.equals(infomationUsers.get(i).getAccount())) {
+                check = false;
             }
+        }
+        if (!check) {
+            System.out.println("Account đã tồn tai");
+            System.out.println("Nhập lại account :");
+            account = sc.nextLine();
+        }
+        return account;
+    }
+
+    public int setAge() {
+        int age = sc.nextInt();
+        boolean check = true;
+        while (check) {
+            if (age <= 0 || age > 120) {
+                System.out.println("Tuổi ko hợp lệ.");
+                System.out.println("Nhập lại tuổi :");
+                age = sc.nextInt();
+            } else {
+                check = false;
+            }
+        }
+        return age;
+    }
+
+    public void editEx() {
+        sc.nextLine();
+    }
+
+    public void show() {
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        System.out.printf("| %10s", "");
+        System.out.printf("%-17s  |  ", "Tên KH");
+        System.out.printf("%3s", "");
+        System.out.printf("%-7s  |  ", "Tuổi");
+        System.out.printf("%5s", "");
+        System.out.printf("%-10s  |  ", "Số ĐT");
+        System.out.printf("%8s", "");
+        System.out.printf("%-15s  |  ", "Account");
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        for (InfomationUser infomationUser : infomationUsers) {
+            System.out.printf("| %5s", "");
+            System.out.printf("%-22s  |  ", infomationUser.getName());
+            System.out.printf("%5s", "");
+            System.out.printf("%-5d  |  ", infomationUser.getAge());
+            System.out.printf("%-15s  |  ", infomationUser.getPhone());
+            System.out.printf("%8s", "");
+            System.out.printf("%-15s  |  ", infomationUser.getAccount());
+            System.out.println();
+            System.out.println("-----------------------------------------------------------------------------------------------");
         }
     }
 }
