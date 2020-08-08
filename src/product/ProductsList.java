@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 public class ProductsList implements Serializable {
     private int id;
-    private int amount ;
-
     private String name;
     private String brand;
     private long price;
+    private int amount;
 
     public ProductsList(){
     }

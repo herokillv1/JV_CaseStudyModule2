@@ -1,4 +1,5 @@
-import admin.AdminProduct;
+import admin.AdminManager;
+import product.ProductManagement;
 import user.UserManager;
 import java.util.*;
 
@@ -6,7 +7,8 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        AdminProduct adminManagers = new AdminProduct();
+        ProductManagement productManagement = new ProductManagement();
+        AdminManager adminManager = new AdminManager();
         UserManager userManager = new UserManager();
 
         boolean check = true;
@@ -20,13 +22,7 @@ public class Main {
                 int choice = sc.nextInt();
                 switch (choice){
                     case 1:
-                        System.out.println("<- Đăng nhập ->");
-                        sc.nextLine();
-                        System.out.println("Account :");
-                        String account = sc.nextLine();
-                        System.out.println("Pass :");
-                        String pass = sc.nextLine();
-                        adminManagers.checkAdmin(account,pass);
+                        adminManager.adminManager();
                         break;
                     case 2:
                         boolean checkUser = true;
@@ -48,6 +44,7 @@ public class Main {
                                         }
                                         break;
                                     case 2:
+                                        productManagement.deleteHistoryBuy();
                                         userManager.signin();
                                         break;
                                     case 0:

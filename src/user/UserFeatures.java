@@ -1,15 +1,14 @@
 package user;
 
-import admin.AdminProduct;
+import admin.AdminFeatures;
 import product.ProductManagement;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class UserProduct {
+public class UserFeatures {
     public static Scanner sc = new Scanner(System.in);
-    public void userProduct() {
+    public void userProduct(String account) {
         ProductManagement productManagement = new ProductManagement();
-        UserManager userManager = new UserManager();
         boolean check = true;
         while (check) {
             int choice;
@@ -40,7 +39,7 @@ public class UserProduct {
                     case 4:
                         System.out.println("Nhập ID sản phẩm muốn mua");
                         int id = sc.nextInt();
-                        productManagement.buy(id);
+                        productManagement.buy(id,account);
                         System.out.println("Mua thành công");
                         break;
                     case 5:
@@ -55,7 +54,7 @@ public class UserProduct {
                 }
             } catch (InputMismatchException ex) {
                 System.err.println("Yêu cầu nhập số");
-                AdminProduct.sc.nextLine();
+                AdminFeatures.sc.nextLine();
             }
 
         }

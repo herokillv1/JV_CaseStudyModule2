@@ -5,7 +5,7 @@ import user.UserManager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class AdminProduct {
+public class AdminFeatures {
     public static Scanner sc = new Scanner(System.in);
     public void adminManager() {
         ProductManagement productManagement = new ProductManagement();
@@ -56,6 +56,7 @@ public class AdminProduct {
                         productManagement.show();
                         break;
                     case 5:
+                        userManager.history();
                         break;
                     case 6:
                         System.out.println("Danh sách KH :");
@@ -69,7 +70,7 @@ public class AdminProduct {
                 }
             } catch (InputMismatchException ex) {
                 System.err.println("Yêu cầu nhập số");
-                AdminProduct.sc.nextLine();
+                AdminFeatures.sc.nextLine();
             }
 
         }

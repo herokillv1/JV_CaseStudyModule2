@@ -1,22 +1,29 @@
 package product;
 
+import admin.History;
 import readandwritefile.ReadAndWriteFile;
 import java.util.*;
 
 public class ProductManagement {
 
     private static final String PATH = "TXT/fileDanhSachSanPham.txt";
-    private static final String PATH1 = "TXT/fileHistoryBuy.txt";
+    private static final String PATHBUY = "TXT/fileHistoryBuy.txt";
+    private static final String PATHHISTORY = "TXT/fileHistory.txt";
     public static Scanner sc = new Scanner(System.in);
     private List<ProductsList> productsLists1;
     private List<ProductsList> productsLists2;
     private ReadAndWriteFile<ProductsList> readAndWriteFile;
+    private List<History> histories;
+    private ReadAndWriteFile<History> readAndWriteFileHistory;
+
 
 
     public ProductManagement() {
         readAndWriteFile = new ReadAndWriteFile();
         productsLists1 = readAndWriteFile.readFile(PATH);
-        productsLists2 = readAndWriteFile.readFile(PATH1);
+        productsLists2 = readAndWriteFile.readFile(PATHBUY);
+        readAndWriteFileHistory = new ReadAndWriteFile();
+        histories = readAndWriteFileHistory.readFile(PATHHISTORY);
     }
 
 
@@ -45,8 +52,71 @@ public class ProductManagement {
         readAndWriteFile.writeFile(PATH, productsLists1);
     }
 
-    public void editEx() {
-        sc.nextLine();
+    public void edit(int id) {
+        boolean isExisted = false;
+        for (int i = 0; i < productsLists1.size(); i++) {
+            if (id == (productsLists1.get(i).getId())) {
+                isExisted = true;
+                System.out.println("Menu");
+                System.out.println("1. Sửa tên SP");
+                System.out.println("2. Sửa hãng SX");
+                System.out.println("3. Sửa giá SP");
+                System.out.println("4. Sửa số lượng SP");
+                System.out.println("0. Kết thúc sủa thông tin SP");
+                int choice1;
+                boolean run = true;
+                while (run) {
+                    choice1 = sc.nextInt();
+                    switch (choice1) {
+                        case 1:
+                            System.out.println("Sửa tên SP " + productsLists1.get(i).getName() + " thành : ");
+                            sc.nextLine();
+                            String tenSP = sc.nextLine();
+                            productsLists1.get(i).setName(tenSP);
+                            System.out.println("Sản phẩm sau khi sửa tên :");
+                            display(productsLists1.get(i));
+                            break;
+                        case 2:
+                            System.out.println("Sửa hãng SX " + productsLists1.get(i).getBrand() + " thành : ");
+                            sc.nextLine();
+                            String hangSX = sc.nextLine();
+                            productsLists1.get(i).setBrand(hangSX);
+                            System.out.println("Sản phẩm sau khi sửa hãng SX :");
+                            display(productsLists1.get(i));
+                            break;
+                        case 3:
+                            System.out.println("Sửa giá SP " + productsLists1.get(i).getPrice() + " thành : ");
+                            sc.nextLine();
+                            long giaSP = sc.nextLong();
+                            productsLists1.get(i).setPrice(giaSP);
+                            System.out.println("Sản phẩm sau khi sửa giá :");
+                            display(productsLists1.get(i));
+                            break;
+                        case 4:
+                            System.out.println("Sửa số lượng SP " + productsLists1.get(i).getAmount() + " thành : ");
+                            sc.nextLine();
+                            int soLuongSP = sc.nextInt();
+                            productsLists1.get(i).setAmount(soLuongSP);
+                            System.out.println("Sản phẩm sau khi sửa số lượng :");
+                            display(productsLists1.get(i));
+                            break;
+                        case 0:
+                            System.out.println("Đã sủa xong.");
+                            System.out.println();
+                            sc.nextLine();
+                            run = false;
+                            break;
+                        default:
+                            System.out.println("No choice!");
+                    }
+                }
+            }
+        }
+        if (!isExisted) {
+            System.out.printf("Id = %d không tồn tại.\n", id);
+        } else {
+            readAndWriteFile.writeFile(PATH, productsLists1);
+        }
     }
 
     public void delete(int idSP) {
@@ -68,74 +138,11 @@ public class ProductManagement {
         }
     }
 
-    public void edit(int id) {
-        boolean isExisted = false;
-        for (int i = 0; i < productsLists1.size(); i++) {
-            if (id == (productsLists1.get(i).getId())) {
-                isExisted = true;
-                System.out.println("Menu");
-                System.out.println("31. Sửa tên SP");
-                System.out.println("32. Sửa hãng SX");
-                System.out.println("33. Sửa giá SP");
-                System.out.println("34. Sửa số lượng SP");
-                System.out.println("30. Kết thúc sủa thông tin SP");
-                int choice1;
-                boolean run = true;
-                while (run) {
-                    choice1 = sc.nextInt();
-                    switch (choice1) {
-                        case 31:
-                            System.out.println("Sửa tên SP " + productsLists1.get(i).getName() + " thành : ");
-                            sc.nextLine();
-                            String tenSP = sc.nextLine();
-                            productsLists1.get(i).setName(tenSP);
-                            System.out.println("Sản phẩm sau khi sửa tên :");
-                            display(productsLists1.get(i));
-                            break;
-                        case 32:
-                            System.out.println("Sửa hãng SX " + productsLists1.get(i).getBrand() + " thành : ");
-                            sc.nextLine();
-                            String hangSX = sc.nextLine();
-                            productsLists1.get(i).setBrand(hangSX);
-                            System.out.println("Sản phẩm sau khi sửa hãng SX :");
-                            display(productsLists1.get(i));
-                            break;
-                        case 33:
-                            System.out.println("Sửa giá SP " + productsLists1.get(i).getPrice() + " thành : ");
-                            sc.nextLine();
-                            long giaSP = sc.nextLong();
-                            productsLists1.get(i).setPrice(giaSP);
-                            System.out.println("Sản phẩm sau khi sửa giá :");
-                            display(productsLists1.get(i));
-                            break;
-                        case 34:
-                            System.out.println("Sửa số lượng SP " + productsLists1.get(i).getAmount() + " thành : ");
-                            sc.nextLine();
-                            int soLuongSP = sc.nextInt();
-                            productsLists1.get(i).setAmount(soLuongSP);
-                            System.out.println("Sản phẩm sau khi sửa số lượng :");
-                            display(productsLists1.get(i));
-                            break;
-                        case 30:
-                            System.out.println("Đã sủa xong.");
-                            System.out.println();
-                            sc.nextLine();
-                            run = false;
-                            break;
-                        default:
-                            System.out.println("No choice!");
-                    }
-                }
-            }
-        }
-        if (!isExisted) {
-            System.out.printf("Id = %d không tồn tại.\n", id);
-        } else {
-            readAndWriteFile.writeFile(PATH, productsLists1);
-        }
+    public void editEx() {
+        sc.nextLine();
     }
 
-    public void buy(int id) {
+    public void buy(int id,String account) {
         boolean isExisted = false;
         for (int i = 0; i < productsLists1.size(); i++) {
             if (id == (productsLists1.get(i).getId())) {
@@ -148,22 +155,25 @@ public class ProductManagement {
                         readAndWriteFile.writeFile(PATH, productsLists1);
                     }else {
                         System.out.println("Hiện tại chỉ còn : "+ productsLists1.get(i).getAmount()+" SP");
-                        buy(id);
+                        buy(id,account);
                         break;
                     }
                 }else {
                     System.out.println("Số lượng không được nhở hơn 0.");
-                    buy(id);
+                    buy(id,account);
                     break;
                 }
                 ProductsList productsList = new ProductsList(productsLists1.get(i).getId(), amount, productsLists1.get(i).getName(), productsLists1.get(i).getBrand(),productsLists1.get(i).getPrice());
+                History history = new History(account,productsLists1.get(i).getId(), productsLists1.get(i).getName(), productsLists1.get(i).getBrand(),productsLists1.get(i).getPrice(),amount);
+                histories.add(history);
                 productsLists2.add(productsList);
             }
         }
         if (!isExisted) {
             System.out.printf("Id = %d không tồn tại.\n", id);
         } else {
-            readAndWriteFile.writeFile(PATH1, productsLists2);
+            readAndWriteFile.writeFile(PATHBUY, productsLists2);
+            readAndWriteFileHistory.writeFile(PATHHISTORY,histories);
         }
     }
 
@@ -172,8 +182,9 @@ public class ProductManagement {
             try {
                 int amount = sc.nextInt();
                 return amount;
-            } catch (NumberFormatException ex) {
-                System.err.print("Không hợp lệ! Nhập lại số lượng : ");
+            } catch (InputMismatchException ex) {
+                System.out.print("Không hợp lệ! Nhập lại số lượng : \n");
+                ProductManagement.sc.nextLine();
             }
         }
     }
@@ -181,6 +192,12 @@ public class ProductManagement {
     public void historyBuy(){
         show1();
     }
+
+    public void deleteHistoryBuy(){
+        productsLists2.removeAll(productsLists2);
+        readAndWriteFile.writeFile(PATHBUY, productsLists2);
+    }
+
 
     public void sortByName() {
         Collections.sort(productsLists1, new SortByName());
@@ -229,6 +246,14 @@ public class ProductManagement {
         }
     }
 
+    public long sumPrice(){
+        long sum = 0;
+        for (ProductsList productsList : productsLists2) {
+            sum += productsList.getPrice()*productsList.getAmount();
+        }
+        return sum;
+    }
+
     public void show1() {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %1s", "");
@@ -254,5 +279,11 @@ public class ProductManagement {
             System.out.println();
             System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         }
+        System.out.println("Tổng tiền phải trả : "+sumPrice()+"vnđ");
+        System.out.println();
+    }
+
+    public List<History> getHistories(){
+        return histories;
     }
 }
