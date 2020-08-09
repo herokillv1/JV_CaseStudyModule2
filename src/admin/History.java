@@ -24,14 +24,6 @@ public class History implements Serializable {
         this.amount = amount;
     }
 
-    public History(String account, int id, String nameSP, String brand, long price, int amount) {
-        this.account = account;
-        this.id = id;
-        this.nameSP = nameSP;
-        this.brand = brand;
-        this.price = price;
-        this.amount = amount;
-    }
 
     public String getTime() {
         return time;
