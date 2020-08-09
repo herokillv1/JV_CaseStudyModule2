@@ -3,6 +3,9 @@ package user;
 import admin.History;
 import product.ProductManagement;
 import readandwritefile.ReadAndWriteFile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,11 +54,14 @@ public class UserManager {
 
 
     public void checkSignin(String account, String pass) {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss  dd/MM/yyyy");
+        String time = simpleDateFormat.format(date.getTime());
         boolean check = true;
         for (int i = 0; i < infomationUsers.size(); i++) {
             if (account.equals(infomationUsers.get(i).getAccount()) && pass.equals(infomationUsers.get(i).getPass())) {
                 check = false;
-                userFeatures.userProduct(account);
+                userFeatures.userProduct(account,time);
                 break;
             }
         }
@@ -149,7 +155,7 @@ public class UserManager {
             System.out.println();
             System.out.println("-----------------------------------------------------------------------------------------------");
             System.out.println("Sản phẩm đã mua :");
-            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.printf("| %1s", "");
             System.out.printf("%-4s  |  ", "ID SP");
             System.out.printf("%20s", "");
@@ -160,8 +166,10 @@ public class UserManager {
             System.out.printf("%-12s  |  ", "Giá SP");
             System.out.printf("%3s", "");
             System.out.printf("%-7s  |  ", "SL SP");
+            System.out.printf("%7s", "");
+            System.out.printf("%-19s  |  ", "Ngày mua hàng");
             System.out.println();
-            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
             for (History history : productManagement.getHistories()){
                 if ((infomationUsers.get(i).getAccount()).equals(history.getAccount())){
                     System.out.printf("| %3s", "");
@@ -169,10 +177,12 @@ public class UserManager {
                     System.out.printf("%-50s  |  ", history.getNameSP());
                     System.out.printf("%-10s  |  ", history.getBrand());
                     System.out.printf("%-18s  |  ", history.getPrice());
-                    System.out.printf("%3s", "");
-                    System.out.printf("%-7s  |  ", history.getAmount());
+                    System.out.printf("%4s", "");
+                    System.out.printf("%-6s  |  ", history.getAmount());
+                    System.out.printf("%4s", "");
+                    System.out.printf("%-22s  |  ", history.getTime());
                     System.out.println();
-                    System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
                 }
             }
             System.out.println();

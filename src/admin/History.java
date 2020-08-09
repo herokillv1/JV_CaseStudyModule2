@@ -3,6 +3,7 @@ package admin;
 import java.io.Serializable;
 
 public class History implements Serializable {
+    private String time;
     private String account;
     private int id;
     private String nameSP;
@@ -13,6 +14,16 @@ public class History implements Serializable {
     public History(){
     }
 
+    public History(String time, String account, int id, String nameSP, String brand, long price, int amount) {
+        this.time = time;
+        this.account = account;
+        this.id = id;
+        this.nameSP = nameSP;
+        this.brand = brand;
+        this.price = price;
+        this.amount = amount;
+    }
+
     public History(String account, int id, String nameSP, String brand, long price, int amount) {
         this.account = account;
         this.id = id;
@@ -20,6 +31,14 @@ public class History implements Serializable {
         this.brand = brand;
         this.price = price;
         this.amount = amount;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getAccount() {

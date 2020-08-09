@@ -142,7 +142,7 @@ public class ProductManagement {
         sc.nextLine();
     }
 
-    public void buy(int id,String account) {
+    public void buy(int id,String account,String time) {
         boolean isExisted = false;
         for (int i = 0; i < productsLists1.size(); i++) {
             if (id == (productsLists1.get(i).getId())) {
@@ -155,16 +155,16 @@ public class ProductManagement {
                         readAndWriteFile.writeFile(PATH, productsLists1);
                     }else {
                         System.out.println("Hiện tại chỉ còn : "+ productsLists1.get(i).getAmount()+" SP");
-                        buy(id,account);
+                        buy(id,account,time);
                         break;
                     }
                 }else {
                     System.out.println("Số lượng không được nhở hơn 0.");
-                    buy(id,account);
+                    buy(id,account,time);
                     break;
                 }
                 ProductsList productsList = new ProductsList(productsLists1.get(i).getId(), amount, productsLists1.get(i).getName(), productsLists1.get(i).getBrand(),productsLists1.get(i).getPrice());
-                History history = new History(account,productsLists1.get(i).getId(), productsLists1.get(i).getName(), productsLists1.get(i).getBrand(),productsLists1.get(i).getPrice(),amount);
+                History history = new History(time,account,productsLists1.get(i).getId(), productsLists1.get(i).getName(), productsLists1.get(i).getBrand(),productsLists1.get(i).getPrice(),amount);
                 histories.add(history);
                 productsLists2.add(productsList);
             }

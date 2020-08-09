@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UserFeatures {
     public static Scanner sc = new Scanner(System.in);
-    public void userProduct(String account) {
+    public void userProduct(String account ,String time) {
         ProductManagement productManagement = new ProductManagement();
         boolean check = true;
         while (check) {
@@ -39,7 +39,7 @@ public class UserFeatures {
                     case 4:
                         System.out.println("Nhập ID sản phẩm muốn mua");
                         int id = sc.nextInt();
-                        productManagement.buy(id,account);
+                        productManagement.buy(id,account,time);
                         System.out.println("Mua thành công");
                         break;
                     case 5:
