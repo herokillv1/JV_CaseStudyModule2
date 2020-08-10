@@ -15,9 +15,9 @@ public class AdminManager {
         while (check){
             System.out.println("Menu");
             System.out.println("1.Đăng nhập");
-            System.out.println("2.Lấy lại account admin");
-            System.out.println("0.Exit");
-            System.out.println("Enter your choice (ENTER NUMBER): ");
+            System.out.println("2.Lấy lại tài khoản quản lý");
+            System.out.println("0.Thoát");
+            System.out.println("Nhập lựa chọn (Nhập số): ");
             try {
                 int choice = sc.nextInt();
                 switch (choice){

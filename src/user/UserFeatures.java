@@ -18,8 +18,8 @@ public class UserFeatures {
             System.out.println("3. Tìm kiếm sản phẩm");
             System.out.println("4. Mua sản phẩm");
             System.out.println("5. Lịch sử mua hàng");
-            System.out.println("0. Exit");
-            System.out.println("Enter your choice (ENTER NUMBER): ");
+            System.out.println("0. Thoát");
+            System.out.println("Nhập lựa chọn (Nhập số): ");
 
             try {
                 choice = sc.nextInt();
@@ -54,7 +54,7 @@ public class UserFeatures {
                         check = false;
                         break;
                     default:
-                        System.out.println("No choice!");
+                        System.out.println("Không có lựa chọn này");
                 }
             } catch (InputMismatchException ex) {
                 System.err.println("Yêu cầu nhập số");

@@ -220,13 +220,9 @@ public class ProductManagement {
         showSearch(productsListsSearch);
     }
 
-
-
-
     public void sortByName() {
         Collections.sort(productsLists1, new SortByName());
     }
-
 
     public void sortByPrice() {
         Collections.sort(productsLists1, new SortByPrice());

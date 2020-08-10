@@ -14,10 +14,10 @@ public class Main {
         boolean check = true;
         while (check){
             System.out.println("Menu");
-            System.out.println("1.Admin");
-            System.out.println("2.User");
-            System.out.println("0.Exit");
-            System.out.println("Enter your choice (ENTER NUMBER): ");
+            System.out.println("1.Quản lý");
+            System.out.println("2.Người dùng");
+            System.out.println("0.Thoát");
+            System.out.println("Nhập lựa chọn (Nhập số): ");
             try {
                 int choice = sc.nextInt();
                 switch (choice){
@@ -30,8 +30,8 @@ public class Main {
                             System.out.println("Menu");
                             System.out.println("1.Đăng kí");
                             System.out.println("2.Đăng nhập");
-                            System.out.println("0.Exit");
-                            System.out.println("Enter your choice (ENTER NUMBER): ");
+                            System.out.println("0.Thoát");
+                            System.out.println("Nhập lựa chọn (Nhập số): ");
                             try {
                                 int choice1 = sc.nextInt();
                                 switch (choice1){
@@ -51,7 +51,7 @@ public class Main {
                                         checkUser = false;
                                         break;
                                     default:
-                                        System.out.println("No choice!");
+                                        System.out.println("Không có lựa chọn này");
                                 }
                             }catch (InputMismatchException ex) {
                                 System.err.println("Yêu cầu nhập số");
@@ -63,7 +63,7 @@ public class Main {
                         check = false;
                         break;
                     default:
-                        System.out.println("No choice!");
+                        System.out.println("Không có lựa chọn này");
                 }
             }catch (InputMismatchException ex) {
                 System.err.println("Yêu cầu nhập số");

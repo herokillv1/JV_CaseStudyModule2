@@ -19,9 +19,9 @@ public class AdminFeatures {
             System.out.println("3. Sửa thông tin sản phẩm");
             System.out.println("4. Hiển thị danh sách SP");
             System.out.println("5. Lịch sửa bán hàng");
-            System.out.println("6. Hiển thị account user");
-            System.out.println("0. Exit");
-            System.out.println("Enter your choice (ENTER NUMBER): ");
+            System.out.println("6. Hiển thị tài khoản người dùng");
+            System.out.println("0. Thoát");
+            System.out.println("Nhập lựa chọn (Nhập số): ");
 
             try {
                 choice = sc.nextInt();
@@ -56,7 +56,16 @@ public class AdminFeatures {
                         productManagement.show();
                         break;
                     case 5:
-                        userManager.history();
+                        sc.nextLine();
+                        System.out.println("Nhập ngày muốn kiểm tra lịch sử :");
+                        System.out.println("Ngày :");
+                        String day = sc.nextLine();
+                        System.out.println("Tháng :");
+                        String month = sc.nextLine();
+                        System.out.println("Năm :");
+                        String year = sc.nextLine();
+                        String time = day+"/"+month+"/"+year;
+                        userManager.history(time);
                         break;
                     case 6:
                         System.out.println("Danh sách KH :");
@@ -66,7 +75,7 @@ public class AdminFeatures {
                         check = false;
                         break;
                     default:
-                        System.out.println("No choice!");
+                        System.out.println("Không có lựa chọn này");
                 }
             } catch (InputMismatchException ex) {
                 System.err.println("Yêu cầu nhập số");
@@ -78,7 +87,7 @@ public class AdminFeatures {
 
     public void checkAdmin(String account ,String pass){
         if (account.equals("admin")){
-            if (pass.equals("admin")){
+            if (pass.equals("*****")){
                 adminManager();
             }else {
                 System.out.println("Sai pass");
