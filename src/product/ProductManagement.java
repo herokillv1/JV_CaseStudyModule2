@@ -3,6 +3,8 @@ package product;
 import admin.History;
 import readandwritefile.ReadAndWriteFile;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProductManagement {
 
@@ -198,6 +200,28 @@ public class ProductManagement {
         readAndWriteFile.writeFile(PATHBUY, productsLists2);
     }
 
+    public boolean checkKey(String key , String input){
+        key = key.toUpperCase();
+        String regex = ".*" + key + ".*";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input.toUpperCase());
+        return matcher.matches();
+    }
+
+    public void  searchProduct(String key){
+        List<ProductsList> productsListsSearch = new ArrayList<>();
+        Iterator<ProductsList> iterator = productsLists1.iterator();
+        while (iterator.hasNext()){
+            ProductsList productsList = iterator.next();
+            if (checkKey(key,productsList.getName())){
+                productsListsSearch.add(productsList);
+            }
+        }
+        showSearch(productsListsSearch);
+    }
+
+
+
 
     public void sortByName() {
         Collections.sort(productsLists1, new SortByName());
@@ -281,6 +305,33 @@ public class ProductManagement {
         }
         System.out.println("Tổng tiền phải trả : "+sumPrice()+"vnđ");
         System.out.println();
+    }
+
+    public void showSearch(List<ProductsList> productsListsSearch) {
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %1s", "");
+        System.out.printf("%-4s  |  ", "ID SP");
+        System.out.printf("%20s", "");
+        System.out.printf("%-30s  |  ", "Tên SP");
+        System.out.printf("%2s", "");
+        System.out.printf("%-8s  |  ", "Hãng SX");
+        System.out.printf("%6s", "");
+        System.out.printf("%-12s  |  ", "Giá SP");
+        System.out.printf("%3s", "");
+        System.out.printf("%-7s  |  ", "SL SP");
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        for (ProductsList productsList : productsListsSearch) {
+            System.out.printf("| %3s", "");
+            System.out.printf("%-3d  |  ", productsList.getId());
+            System.out.printf("%-50s  |  ", productsList.getName());
+            System.out.printf("%-10s  |  ", productsList.getBrand());
+            System.out.printf("%-18s  |  ", productsList.getPrice());
+            System.out.printf("%3s", "");
+            System.out.printf("%-7s  |  ", productsList.getAmount());
+            System.out.println();
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+        }
     }
 
     public List<History> getHistories(){

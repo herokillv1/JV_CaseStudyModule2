@@ -35,6 +35,10 @@ public class UserFeatures {
                         productManagement.show();
                         break;
                     case 3:
+                        sc.nextLine();
+                        System.out.println("Nhập từ khóa tìm kiếm :");
+                        String key = sc.nextLine();
+                        productManagement.searchProduct(key);
                         break;
                     case 4:
                         System.out.println("Nhập ID sản phẩm muốn mua");

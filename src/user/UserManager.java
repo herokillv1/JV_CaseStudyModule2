@@ -81,7 +81,7 @@ public class UserManager {
         if (!check) {
             System.out.println("Account đã tồn tai");
             System.out.println("Nhập lại account :");
-            account = sc.nextLine();
+            checkAccount();
         }
         return account;
     }
